@@ -9,10 +9,11 @@ class Login {
         this.login.innerHTML = `
             <input type="text" name="email" id="email" value="">
             <input type="password" name="password" id="password" value="">
-            <input class="button" type="submit" value="Login">
+            <input class="button material" type="submit" value="Login">
         `;
         this.logout = document.createElement('span');
         this.logout.id = "log-out";
+        this.logout.setAttribute('class', 'material');
         this.logout.innerText = "Log out";
 
         this.login.addEventListener('submit', this.onLogin.bind(this));

@@ -47,7 +47,7 @@ function main() {
     }
     else {
         document.getElementById('postButton').classList.add('disabled');
-        document.getElementById('postButton').setAttribute('disabled');
+        document.getElementById('postButton').setAttribute('disabled', 'disabled');
     }
     
     

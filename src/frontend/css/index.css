@@ -6,6 +6,10 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+body {
+  background-color: #efefef;
+}
+
 .wrapper {
   max-width: 800px;
   padding: 3rem;
@@ -20,6 +24,7 @@ h2 {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
   padding: 2rem;
   margin-bottom: 2rem;
+  background-color: white;
 }
 
 .post-header img {
@@ -59,9 +64,13 @@ h2 {
   margin: 0.25rem;
 }
 
-.button.disabled {
+.button.disabled, .button.material.disabled{
   background-color: #ccc; /* Green */
   color: #333;
+}
+
+.button.material {
+  background-color: #ee7802;
 }
 
 textarea {
@@ -90,6 +99,17 @@ header {
     flex-direction: row;
     justify-content: flex-end;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); 
+    background-color: white;
+}
+
+header.dark {
+  background-color: black;
+  color: white;
+}
+
+header.material{
+  background-color: #0278EE;
+  color: white;
 }
 
 header h1 {
@@ -113,5 +133,10 @@ header h1 {
     line-height: 1rem;
     padding: 0.5rem 1rem;
     margin: 0.25rem;
+}
+
+#log-out.material {
+  color: #ee7802;
+  font-weight: bold;
 }
 
