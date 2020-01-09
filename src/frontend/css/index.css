@@ -59,6 +59,11 @@ h2 {
   margin: 0.25rem;
 }
 
+.button.disabled {
+  background-color: #ccc; /* Green */
+  color: #333;
+}
+
 textarea {
     resize: none;
     border-radius: 0.25rem;
@@ -109,3 +114,4 @@ header h1 {
     padding: 0.5rem 1rem;
     margin: 0.25rem;
 }
+
