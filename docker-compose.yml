@@ -12,7 +12,9 @@ services:
     links:
       - mongo
     environment: 
+      - NODE_ENV=development
       - MONGO_URI=mongodb://mongo:27017/web-dev
+      - SECRET_OR_KEY=Vx6VScMm9kz6ko
   mongo:
     container_name: mongo
     image: mongo:4.0.4
