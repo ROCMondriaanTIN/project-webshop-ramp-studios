@@ -13,7 +13,7 @@ function main() {
     document.getElementById("header").append(loginComponent.render());
 
     let form = document.getElementById("addPost");
-    form.addEventListener("submit", function(evt) {
+    form.addEventListener("submit", (evt) => {
         evt.preventDefault();
         let textarea = document.getElementById('postText');
         if(api.isAuthenticated && textarea.value !== '') {

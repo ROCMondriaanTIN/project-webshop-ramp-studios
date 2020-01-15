@@ -9,14 +9,9 @@ const User = require('../../models/User');
 // @route    POST api/posts
 // @desc     Create a post
 // @access   Private
-router.post(
-    '/',
-    [
-        auth,
-        [
-            check('text', 'Text is required')
-                .not()
-                .isEmpty()
+router.post('/', [
+        auth, [
+            check('text', 'Text is required').not().isEmpty()
         ]
     ],
     async (req, res) => {
@@ -38,7 +33,8 @@ router.post(
             const post = await newPost.save();
 
             res.json(post);
-        } catch (err) {
+        } 
+        catch (err) {
             console.error(err.message);
             res.status(500).send('Server Error');
         }
@@ -75,7 +71,8 @@ router.get('/:id', auth,
             }
 
             res.json(post);
-        } catch (err) {
+        } 
+        catch (err) {
             console.error(err.message);
             res.status(500).send('Server Error');
         }
