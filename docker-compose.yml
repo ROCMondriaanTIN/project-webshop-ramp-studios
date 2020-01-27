@@ -7,7 +7,7 @@ services:
     build: .
     volumes: 
       - ./:/usr/src/app
-    ports:
+    ports: 
       - '5000:5000'
     links:
       - mongo
