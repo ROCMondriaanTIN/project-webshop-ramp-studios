@@ -16,10 +16,10 @@ See https://docs.docker.com/install/linux/docker-ce/ubuntu/ and follow the steps
 
 ### 1b. Installation Windows
 #### NodeJS
-Download and install https://nodejs.org/en/
+Download and install the LTS version of https://nodejs.org/en/. 
 
 #### Yarn
-https://legacy.yarnpkg.com/lang/en/docs/install/#windows-stable
+See https://legacy.yarnpkg.com/lang/en/docs/install/#windows-stable on how to install Yarn.
 
 #### Docker
 For Windows see https://docs.docker.com/docker-for-windows/install/ and follow the instructions.
