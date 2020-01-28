@@ -1,7 +1,7 @@
 # A project with a simple API
 
 ## How to start this project
-Make sure you have installed docker, nodejs and yarn.
+Clone the project and make sure you have the following programs installed: docker, nodejs and yarn. See installation for the correct platform.
 
 ### 1a. Installation Linux
 #### NodeJS
