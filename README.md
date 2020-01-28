@@ -15,6 +15,8 @@ See https://docs.docker.com/install/linux/docker-ce/ubuntu/ and follow the steps
 
 
 ### 1b. Installation Windows
+**This could only be done on a Windows 10 Pro or Enterprise edition.**
+
 #### NodeJS
 Download and install the LTS version of https://nodejs.org/en/. 
 
