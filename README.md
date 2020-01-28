@@ -5,7 +5,7 @@ Clone the project and make sure you have the following programs installed: docke
 
 ### 1a. Installation Linux
 #### NodeJS
-See https://github.com/nodesource/distributions/blob/master/README.md on how to install NodeJS. Look on the NodeJS website to find the latest LTS version.
+See https://github.com/nodesource/distributions/blob/master/README.md on how to install NodeJS. Look on the NodeJS website to find the latest LTS version. The command used in this URL uses `curl` make sure you install this first, `sudo apt install curl`.
 
 #### Yarn
 See https://legacy.yarnpkg.com/lang/en/docs/install/#debian-stable on how to install Yarn.
