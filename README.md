@@ -10,9 +10,9 @@ See https://github.com/nodesource/distributions/blob/master/README.md on how to 
 #### Yarn
 See https://legacy.yarnpkg.com/lang/en/docs/install/#debian-stable on how to install Yarn.
 
-
 #### Docker
 See https://docs.docker.com/install/linux/docker-ce/ubuntu/ and follow the steps for 'Install using the repository'
+
 
 ### 1b. Installation Windows
 #### NodeJS
@@ -22,7 +22,7 @@ Download and install the LTS version of https://nodejs.org/en/.
 See https://legacy.yarnpkg.com/lang/en/docs/install/#windows-stable on how to install Yarn.
 
 #### Docker
-For Windows see https://docs.docker.com/docker-for-windows/install/ and follow the instructions.
+For Windows see https://docs.docker.com/docker-for-windows/install/ and follow the instructions. This could only be done on a Windows 10 Pro or Enterprise edition.
 
 ### How to start the server
 Open a terminal / command prompt / Power shell, and type `yarn development`. This will compose two docker containers and link them together. 
