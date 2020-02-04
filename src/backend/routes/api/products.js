@@ -113,6 +113,30 @@ router.put('/buy/:id', auth,
     }
 );
 
+// @route    PUT api/products/restock/:id
+// @desc     Restock a product
+// @access   Private
+router.put('/restock/:id', [
+        auth, [
+            check('quantity').notEmpty()
+        ]
+    ],
+    async (req, res) => {
+        try {
+            const product = await Product.findById(req.params.id);
+            const quantity = req.body.quantity; 
+            product.quantityInStock += quantity;
+            await product.save();
+            res.json("Restock product");
+            return;
+        }
+        catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
+    }
+);
+
 // @route    DELETE api/products/:id
 // @desc     Delete a product
 // @access   Private
