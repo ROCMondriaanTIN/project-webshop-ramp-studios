@@ -4,11 +4,9 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const { check, validationResult } = require('express-validator/check');
+const { check, validationResult } = require('express-validator');
 
 const User = require('../../models/User');
-// TODO: ADD ROLE
-
 
 // @route    POST api/users
 // @desc     Register user
@@ -17,7 +15,8 @@ router.post('/', [
         check('name', 'Name is required')
             .not()
             .isEmpty(),
-        check('email', 'Please include a valid email').isEmail(),
+        check('email', 'Please include a valid email')
+            .isEmail(),
         check(
             'password',
             'Please enter a password with 6 or more characters'
@@ -31,7 +30,7 @@ router.post('/', [
             });
         }
 
-        const { name, email, password } = req.body;
+        let { name, email, password, role } = req.body;
 
         try {
             let user = await User.findOne({ email });
@@ -47,12 +46,13 @@ router.post('/', [
                 r: 'pg',
                 d: 'mm'
             });
-
+            role = role === 'admin' ? role : 'guest'; 
             user = new User({
                 name,
                 email,
                 avatar,
-                password
+                password,
+                role
             });
 
             const salt = await bcrypt.genSalt(10);
