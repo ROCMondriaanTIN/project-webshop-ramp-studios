@@ -73,11 +73,9 @@ router.post('/', [
 
             const { name, brand, images, description, price, quantityInStock } = req.body;
 
-
             const newProduct = new Product({ name, brand, images, description, price, quantityInStock });
 
             const product = await newProduct.save();
-
             res.json(product);
         } 
         catch (err) {
@@ -87,14 +85,36 @@ router.post('/', [
     }
 );
 
-
-module.exports = router;
-
-
-
 //get searchbyname /products?cat=sport   all
 
 //update product                admin
 
-//delete product                admin
+// @route    DELETE api/products/:id
+// @desc     Delete a product
+// @access   Private
+router.delete('/:id', auth, 
+    async (req, res) => {
+        try {
+            // Check for ObjectId format
+            if(req.params.id.match(/^[0-9a-fA-F]{24}$/)){
+                const user = await User.findById(req.user.id).select('-password');
+                if(user.role !== 'admin') {
+                    res.status(403).send('Not authorized');
+                    return;
+                }
+                const product = await Product.findById(req.params.id);
+                if(product) {
+                    await product.remove();
+                    res.json({ msg: 'Product removed' });
+                }
+            }
+            return res.status(404).json({ msg: 'product not found' });   
+        } 
+        catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
+    }
+);
 
+module.exports = router;
