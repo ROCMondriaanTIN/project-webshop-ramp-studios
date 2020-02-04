@@ -1,14 +1,14 @@
 FROM node:12
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/app/
 
-COPY package*.json .
-COPY yarn.lock .
+COPY package*.json ./
+COPY yarn.lock ./
 
-RUN yarn install
+RUN npm install
 
 COPY . .
 
 EXPOSE 5000
 
-CMD ["yarn", "start"]
+CMD ["npm", "start"]

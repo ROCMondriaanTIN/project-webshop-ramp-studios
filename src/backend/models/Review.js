@@ -21,7 +21,7 @@ const reviewSchema = new Schema({
       default: Date.now
     },
     rating:{
-      type:Integer,
+      type: Number,
       min:1,
       max:5
     }

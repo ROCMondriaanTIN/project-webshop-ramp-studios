@@ -7,7 +7,7 @@ const { check, validationResult } = require('express-validator/check');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
-const Post = require('../../models/Post');
+const Review = require('../../models/Review');
 
 //TODO: update to new model!
 
@@ -157,7 +157,7 @@ router.delete('/', auth,
     async (req, res) => {
         try {
             // Remove user posts
-            await Post.deleteMany({ user: req.user.id });
+            await Review.deleteMany({ user: req.user.id });
             // Remove profile
             await Profile.findOneAndRemove({ user: req.user.id });
             // Remove user

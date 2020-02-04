@@ -16,8 +16,9 @@ const Product = require('../../models/Product');
 // @route    GET api/products
 // @desc     Get all products
 // @access   Private
-router.get('/', auth, 
+router.get('/', 
     async (req, res) => {
+        console.log(req);
         try {
             const products = await Product.find().sort({ date: -1 });
             res.json(products);
@@ -57,6 +58,7 @@ router.get('/:id',
     }
 );
 
+module.exports = router;
 
 
 

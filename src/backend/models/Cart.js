@@ -13,7 +13,7 @@ const cartSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'artikels'
     },
-    amount: {type: Integer, default: 1}
+    amount: {type: Number, default: 1}
   }], 
   date: {
       type: Date,

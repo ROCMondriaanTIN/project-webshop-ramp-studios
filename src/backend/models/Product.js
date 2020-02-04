@@ -9,8 +9,8 @@ const productSchema = new Schema({
     image: {type: String}
   }],
   description: {type: String},      // omschrijving
-  price:{type: Double},             // prijs
-  quantityInStock: {type: Integer}, //aantal op voorraad
+  price:{type: Number},             // prijs
+  quantityInStock: {type: Number}, //aantal op voorraad
   reviews: [ { post: { type: Schema.Types.ObjectId, ref: 'posts'} } ] // nog niet getest 
 });
 
