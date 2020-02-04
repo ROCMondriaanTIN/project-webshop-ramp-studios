@@ -7,6 +7,8 @@ const config = require('config');
 const { check, validationResult } = require('express-validator/check');
 
 const User = require('../../models/User');
+// TODO: ADD ROLE
+
 
 // @route    POST api/users
 // @desc     Register user
