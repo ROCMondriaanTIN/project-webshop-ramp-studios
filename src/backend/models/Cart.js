@@ -11,7 +11,7 @@ const cartSchema = new Schema({
   artikels: [{
     artikel: {
       type: Schema.Types.ObjectId,
-      ref: 'artikels'
+      ref: 'products'
     },
     amount: {type: Number, default: 1}
   }], 

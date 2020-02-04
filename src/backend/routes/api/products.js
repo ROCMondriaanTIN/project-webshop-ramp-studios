@@ -88,6 +88,30 @@ router.post('/', [
 //get searchbyname /products?cat=sport   all
 
 //update product                admin
+// @route    PUT api/products/buy/:id
+// @desc     Buy a product
+// @access   Private
+router.put('/buy/:id', auth, 
+    async (req, res) => {
+        try {
+            const product = await Product.findById(req.params.id);
+
+            console.log(req.body);
+            const quantity = req.body.quantity === undefined ? 1 : req.body.quantity; 
+            if(product.quantityInStock >= quantity) {
+                product.quantityInStock -= quantity;
+                await product.save();
+                res.json("Bought product");
+                return;
+            }
+            res.json(`Out of stock there are only ${product.quantityInStock} left`);
+        }
+        catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
+    }
+);
 
 // @route    DELETE api/products/:id
 // @desc     Delete a product
