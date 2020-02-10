@@ -13,8 +13,31 @@ const User = require('../../models/User');
 router.get('/', 
     async (req, res) => {
         try {
-            const products = await Product.find().sort({ date: -1 });
-            res.json(products);
+            let pageNo = parseInt(req.query.pageNo) || 1;
+            let limit = parseInt(req.query.limit) || 10;
+            let sortBy = req.query.sortBy;
+            let allowedSort = [
+                "dateUp",
+                "dateDown",
+                "nameUp",
+                "nameDown",
+                "priceUp",
+                "priceDown",
+            ];
+            let sort = {};
+            if(allowedSort.indexOf(sortBy)!== -1) {
+                if(sortBy.indexOf("Up") !== -1) {
+                    let variable = sortBy.slice(0, sortBy.indexOf("Up"));
+                    sort[variable] = -1;
+                } else {
+                    let variable = sortBy.slice(0, sortBy.indexOf("Down"));
+                    sort[variable] = 1;
+                }
+            }
+            const count = await Product.count();
+            let totalPages = Math.ceil(count / limit);
+            const products = await Product.find().sort(sort).skip(limit * (pageNo - 1)).limit(limit);
+            res.json({products: products, totalPages: totalPages, limit: limit, pageNo: pageNo});
         } 
         catch (err) {
             console.error(err.message);
@@ -86,22 +109,27 @@ router.post('/', [
 
 //get searchbyname /products?cat=sport   all
 
-//update product                admin
-// @route    PUT api/products/buy/:id
-// @desc     Buy a product
+
+// @route    PUT api/products/restock/:id
+// @desc     Restock a product
 // @access   Private
-router.put('/buy/:id', auth, 
+router.put('/restock/:id', [
+        auth, [
+            check('quantity', 'Quantity must not be empty').notEmpty()
+        ]
+    ],
     async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
         try {
             const product = await Product.findById(req.params.id);
-            const quantity = req.body.quantity === undefined ? 1 : req.body.quantity; 
-            if(product.quantityInStock >= quantity) {
-                product.quantityInStock -= quantity;
-                await product.save();
-                res.json("Bought product");
-                return;
-            }
-            res.json(`Out of stock there are only ${product.quantityInStock} left`);
+            const quantity = req.body.quantity; 
+            product.quantityInStock += quantity;
+            await product.save();
+            res.json({msg: "Restock product"});
+            return;
         }
         catch (err) {
             console.error(err.message);
@@ -110,22 +138,36 @@ router.put('/buy/:id', auth,
     }
 );
 
-// @route    PUT api/products/restock/:id
-// @desc     Restock a product
+// @route    PUT api/products/id/review
+// @desc     Review a product
 // @access   Private
-router.put('/restock/:id', [
+router.put('/:id/review', [
         auth, [
-            check('quantity').notEmpty()
+            check('text', 'You must write a message').not().isEmpty(),
+            check('rating', 'Rating must be between 1 - 5').matches(/^[1-5]$/)
         ]
     ],
     async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
         try {
             const product = await Product.findById(req.params.id);
-            const quantity = req.body.quantity; 
-            product.quantityInStock += quantity;
+            if(!product) return res.status(400).json("Could not find product");
+            const user = await User.findById(req.user.id);
+            
+            const review = {
+                user: req.user.id,
+                text: req.body.text,
+                rating: req.body.rating,
+                name: user.name,
+                avatar: user.avatar
+            };
+
+            product.reviews.unshift(review);
             await product.save();
-            res.json("Restock product");
-            return;
+            res.json(product);
         }
         catch (err) {
             console.error(err.message);

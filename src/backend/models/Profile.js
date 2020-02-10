@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 // Create Schema
 const profileSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'users'},
-    address : {
+    address: {
         street: {type: String},
         houseNumber: {type: String},
         zipcode: {type:String},
