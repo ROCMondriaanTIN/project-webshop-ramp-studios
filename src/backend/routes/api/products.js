@@ -24,6 +24,15 @@ router.get('/',
                 "priceUp",
                 "priceDown",
             ];
+            let search = req.query.search;
+            let category = req.query.category;
+            let filter = {};
+            if(search) {
+                filter.name = new RegExp("^" + search, "i");
+            }
+            if(category) {
+                filter.category = new RegExp("^" + category, "i");
+            }
             let sort = {};
             if(allowedSort.indexOf(sortBy)!== -1) {
                 if(sortBy.indexOf("Up") !== -1) {
@@ -36,7 +45,7 @@ router.get('/',
             }
             const count = await Product.count();
             let totalPages = Math.ceil(count / limit);
-            const products = await Product.find().sort(sort).skip(limit * (pageNo - 1)).limit(limit);
+            const products = await Product.find(filter).sort(sort).skip(limit * (pageNo - 1)).limit(limit);
             res.json({products: products, totalPages: totalPages, limit: limit, pageNo: pageNo});
         } 
         catch (err) {
@@ -95,9 +104,9 @@ router.post('/', [
                 return;
             }
 
-            const { name, brand, images, category, description, price, quantityInStock } = req.body;
+            const { name, brand, images, category, description, price, sale, quantityInStock } = req.body;
 
-            const newProduct = new Product({ name, brand, images, category, description, price, quantityInStock });
+            const newProduct = new Product({ name, brand, images, category, description, price, sale, quantityInStock });
 
             const product = await newProduct.save();
             res.json(product);

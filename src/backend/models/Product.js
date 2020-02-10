@@ -11,6 +11,7 @@ const productSchema = new Schema({
   category: {type: String},
   description: {type: String},      // omschrijving
   price: {type: Number},             // prijs
+  sale: {type: Boolean, default: false},
   quantityInStock: {type: Number}, //aantal op voorraad
   reviews: [{ 
     user: {
