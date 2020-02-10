@@ -77,6 +77,8 @@ router.get('/:id',
 router.post('/', [
         auth, [
             check('name', 'Name is required').not().isEmpty(),
+            check('category', 'category is required').not().isEmpty(),
+            check('price', 'price is required').not().isEmpty(),
         ]
     ],
     async (req, res) => {
@@ -93,9 +95,9 @@ router.post('/', [
                 return;
             }
 
-            const { name, brand, images, description, price, quantityInStock } = req.body;
+            const { name, brand, images, category, description, price, quantityInStock } = req.body;
 
-            const newProduct = new Product({ name, brand, images, description, price, quantityInStock });
+            const newProduct = new Product({ name, brand, images, category, description, price, quantityInStock });
 
             const product = await newProduct.save();
             res.json(product);

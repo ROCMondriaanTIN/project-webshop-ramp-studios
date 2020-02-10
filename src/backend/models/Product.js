@@ -8,6 +8,7 @@ const productSchema = new Schema({
   images: [{
     image: {type: String}
   }],
+  category: {type: String},
   description: {type: String},      // omschrijving
   price: {type: Number},             // prijs
   quantityInStock: {type: Number}, //aantal op voorraad
