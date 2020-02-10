@@ -2,6 +2,18 @@ const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'src/frontend/img/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, new Date().getMilliseconds() + "_" + file.originalname)
+    }
+});
+
+const upload = multer({storage: storage});
 
 // Models
 const Product = require('../../models/Product');
@@ -43,7 +55,7 @@ router.get('/',
                     sort[variable] = 1;
                 }
             }
-            const count = await Product.count();
+            const count = await Product.countDocuments();
             let totalPages = Math.ceil(count / limit);
             const products = await Product.find(filter).sort(sort).skip(limit * (pageNo - 1)).limit(limit);
             res.json({products: products, totalPages: totalPages, limit: limit, pageNo: pageNo});
@@ -83,13 +95,13 @@ router.get('/:id',
 // @route    POST api/products
 // @desc     Create a post
 // @access   Private
-router.post('/', [
-        auth, [
+router.post('/', [auth, upload.array('images', 5)]
+        /*, [
             check('name', 'Name is required').not().isEmpty(),
             check('category', 'category is required').not().isEmpty(),
             check('price', 'price is required').not().isEmpty(),
-        ]
-    ],
+        ],*/
+    ,
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -97,6 +109,9 @@ router.post('/', [
         }
         
         try {
+            // console.log(req.files);
+            // console.log(req);
+            // return; 
             const user = await User.findById(req.user.id).select('-password');
             
             if(user.role !== 'admin') {
@@ -104,7 +119,14 @@ router.post('/', [
                 return;
             }
 
-            const { name, brand, images, category, description, price, sale, quantityInStock } = req.body;
+
+            const { name, brand, category, description, price, sale, quantityInStock } = req.body;
+            images = [];
+            for(let i = 0; i < req.files.length; i++) {
+                images.push(req.files[i].path);
+            }  
+
+            console.log(images);
 
             const newProduct = new Product({ name, brand, images, category, description, price, sale, quantityInStock });
 

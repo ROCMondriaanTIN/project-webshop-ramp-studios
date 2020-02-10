@@ -92,6 +92,17 @@ class API {
         }
     }
 
+    async addProduct(formData) {
+        let response = await this.postData(this.url + '/products', formData, true);
+        if (response.ok) {
+            let data = await response.json();
+            return data;
+        }
+        else {
+            throw `Error: ${response.status} ${response.statusText}`;
+        }
+    }
+
     async getPosts() {
         let response = await this.getData(this.url + '/posts');
         if (response.ok) {
@@ -103,13 +114,21 @@ class API {
         }
     }
 
-    postData(url = '', data = {}) {
+    postData(url = '', data = {}, isFormData = false) {
+        let request = {
+            method: 'POST'
+        };
+        if(!isFormData){
+            request.headers = this.headers;
+            request.body = JSON.stringify(data);
+        }
+        else {
+            delete this.headers['Content-Type'];
+            request.headers = this.headers;
+            request.body = data;
+        }
         // Default options are marked with *
-        return fetch(url, {
-            method: 'POST', // *GET, POST, PUT, DELETE, etc.
-            headers: this.headers,
-            body: JSON.stringify(data) // body data type must match "Content-Type" header
-        });
+        return fetch(url, request);
     }
 
     getData(url = '', data = {}) {
