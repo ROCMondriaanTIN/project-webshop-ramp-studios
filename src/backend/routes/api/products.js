@@ -12,7 +12,6 @@ const User = require('../../models/User');
 // @access   Public
 router.get('/', 
     async (req, res) => {
-        console.log(req);
         try {
             const products = await Product.find().sort({ date: -1 });
             res.json(products);
@@ -95,8 +94,6 @@ router.put('/buy/:id', auth,
     async (req, res) => {
         try {
             const product = await Product.findById(req.params.id);
-
-            console.log(req.body);
             const quantity = req.body.quantity === undefined ? 1 : req.body.quantity; 
             if(product.quantityInStock >= quantity) {
                 product.quantityInStock -= quantity;
