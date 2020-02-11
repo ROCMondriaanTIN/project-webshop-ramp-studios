@@ -118,7 +118,7 @@ router.post('/', [auth, upload.array('images', 5), [
             const { name, brand, category, description, price, sale, quantityInStock } = req.body;
             images = [];
             for(let i = 0; i < req.files.length; i++) {
-                images.push(req.files[i].path);
+                images.push(req.files[i].path.replace('src/frontend/', ''));
             }
 
             const newProduct = new Product({ name, brand, images, category, description, price, sale, quantityInStock });
