@@ -1,3 +1,7 @@
+window.addEventListener('onload', () => {
+    main();
+});
+
 window.onload = main;
 
 let api;
