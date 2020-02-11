@@ -15,12 +15,12 @@
     "type": "git",
     "url": "git+ssh://git@github.com/rcspringer/project-webdeve-api.git"
   },
-  "author": "R C Springer",
+  "author": "R C Springer, P Thong",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/rcspringer/project-webdeve-api/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/rcspringer/project-webdeve-api#readme",
+  "homepage": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.2.4",
@@ -31,7 +31,6 @@
     "mongoose": "^5.8.5",
     "multer": "^1.4.2",
     "nodemon": "^2.0.2",
-    "open": "^7.0.0",
     "request": "^2.88.0"
   }
 }

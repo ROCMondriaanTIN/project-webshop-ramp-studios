@@ -31,7 +31,6 @@ class API {
         }
     }
 
-
     async createUser(name, email, password) {
         let response = await this.postData(this.url + '/users', {
             name,
@@ -82,21 +81,7 @@ class API {
         }
     }
 
-    //adds a product to the Database
-     async addProduct(product) {
-         console.log(product);
-        let response = await this.postData(this.url + '/products', product);
-        if (response.ok) {
-            let data = await response.json();
-            return data;
-        }
-        else {
-            throw `Error: ${response.status} ${response.statusText}`;
-        }
-    }
-
-
-     async getProducts() {
+    async getProducts() {
         let response = await this.getData(this.url + '/products');
         if (response.ok) {
             let data = await response.json();
@@ -107,11 +92,19 @@ class API {
         }
     }
 
+    async restockProduct(id, quantity) {
+        let response = await this.putData(this.url + '/products/'+ id +'/restock', {quantity: quantity});
+        if (response.ok) {
+            let data = await response.json();
+            return data;
+        }
+        else {
+            throw `Error: ${response.status} ${response.statusText}`;
+        }
+    }
 
-
-    //model post
-    async addPost(text) {
-        let response = await this.postData(this.url + '/posts', { text });
+    async deleteProduct(id) {
+        let response = await this.deleteData(this.url + '/products/'+ id);
         if (response.ok) {
             let data = await response.json();
             return data;
@@ -132,17 +125,8 @@ class API {
         }
     }
 
-    async getPosts() {
-        let response = await this.getData(this.url + '/posts');
-        if (response.ok) {
-            let data = await response.json();
-            return data;
-        }
-        else {
-            throw `Error: ${response.status} ${response.statusText}`;
-        }
-    }
 
+    // API Data calls GET, POST, PUT, DELETE
     postData(url = '', data = {}, isFormData = false) {
         let request = {
             method: 'POST'

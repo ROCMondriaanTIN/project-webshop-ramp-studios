@@ -1,6 +1,7 @@
 class Component{
   constructor(element){
     this.rootElement = document.createElement(element);
+    
   }
 
   getElementById(id) {

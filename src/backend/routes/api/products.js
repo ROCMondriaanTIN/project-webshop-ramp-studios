@@ -133,10 +133,10 @@ router.post('/', [auth, upload.array('images', 5), [
     }
 );
 
-// @route    PUT api/products/restock/:id
+// @route    PUT api/products/:id/restock
 // @desc     Restock a product
 // @access   Private
-router.put('/restock/:id', [
+router.put('/:id/restock', [
         auth, [
             check('quantity', 'Quantity must not be empty').notEmpty()
         ]

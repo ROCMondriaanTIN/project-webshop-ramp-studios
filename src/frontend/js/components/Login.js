@@ -1,46 +1,46 @@
-class Login {
+class Login extends Component {
 
     constructor(isLoggedIn) {
-        this.showLogin = !isLoggedIn;
-        this.login = document.createElement('form');
-        this.login.id = "login";
-        this.login.name = "myLogin";
-        this.login.innerHTML = `
+        super(isLoggedIn ? "span" : "form");
+        this.isLoggedIn = isLoggedIn;
+        console.log(this.isLoggedIn);
+        this.initView();
+    }
+
+    initView() {
+        let id = "log-out";
+        let innerHTML = `Log out`;
+        let event = 'click';
+        if(!this.isLoggedIn) {
+            event = 'submit';
+            id = "login";
+            innerHTML = `
             <input type="text" name="email" id="email" value="">
             <input type="password" name="password" id="password" value="">
-            <input class="button" type="submit" value="Login">
-        `;
-        this.logout = document.createElement('span');
-        this.logout.id = "log-out";
-        // this.logout.setAttribute('class', 'material');
-        this.logout.innerText = "Log out";
-
-        this.login.addEventListener('submit', (e) => this.onLogin(e));
-        this.logout.addEventListener('click', (e) => this.onLogout(e));
+            <input class="button" type="submit" value="Login">`; 
+        }
+        this.rootElement.id = id;
+        this.rootElement.innerHTML = innerHTML;
+        this.rootElement.addEventListener(event, (e) => this.onEvent(e));
     }
 
-    onLogin(e) {
-        e.preventDefault();
-        let email = document.getElementById('email').value;
-        let password = document.getElementById('password').value;
-        console.log(email),
-        console.log(password),
-        api.loginUser(email, password)
-            .then((response) => {
-                window.location = '/';
-            })
-            .catch((err) => {
-                console.log(err);
-                this.login.setAttribute("class", "error");
-            });
-    }
-
-    onLogout(e) {
-        api.logoutUser();
-        window.location = '/';
-    }
-
-    render() {
-        return this.showLogin ? this.login : this.logout;
+    onEvent(e) {
+        if(this.isLoggedIn) {
+            api.logoutUser();
+            window.location = '/';
+        }
+        else {
+            e.preventDefault();
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+            api.loginUser(email, password)
+                .then((response) => {
+                    window.location = '/';
+                })
+                .catch((err) => {
+                    console.log(err);
+                    this.rootElement.setAttribute("class", "error");
+                });
+        }
     }
 }

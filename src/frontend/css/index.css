@@ -10,6 +10,10 @@ body {
   background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
 }
 
+body>header>img{
+  width:100px;
+}
+
 main {
   max-width: 800px;
   padding: 3rem;
@@ -102,6 +106,12 @@ header {
     background-color: white;
 }
 
+main>section>article{
+  border:solid;
+  margin:3em;
+  padding:3em;
+}
+
 #login {
     display: flex;
     flex-direction: row;
@@ -109,7 +119,7 @@ header {
     width: 50vw;
 }
 
-#login.error > * {
+.error > input {
   border: 1px solid rgb(179, 0, 0);
 }
 
