@@ -109,7 +109,7 @@ header {
     width: 50vw;
 }
 
-#login.error > * {
+.error > input {
   border: 1px solid rgb(179, 0, 0);
 }
 
