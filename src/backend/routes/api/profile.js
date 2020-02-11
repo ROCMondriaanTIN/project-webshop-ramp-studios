@@ -31,28 +31,6 @@ router.get('/me', auth,
     }
 );
 
-// @route    DELETE api/profile
-// @desc     Delete profile, user & posts
-// @access   Private
-router.delete('/', auth, 
-    async (req, res) => {
-        try {
-            // Remove user posts
-            // await Review.deleteMany({ user: req.user.id });
-            // Remove profile
-            await Profile.findOneAndRemove({ user: req.user.id });
-            // Remove user
-            // await User.findOneAndRemove({ _id: req.user.id });
-
-            res.json({ msg: 'User profile deleted' });
-        } 
-        catch (err) {
-            console.error(err.message);
-            res.status(500).send('Server Error');
-        }
-    }
-);
-
 // @route    PUT api/profile/address
 // @desc     Add profile address
 // @access   Private
@@ -103,6 +81,26 @@ router.put('/address',
 
             res.json(profile);
         }
+        catch (err) {
+            console.error(err.message);
+            res.status(500).send('Server Error');
+        }
+    }
+);
+
+// @route    DELETE api/profile
+// @desc     Delete profile, user & posts
+// @access   Private
+router.delete('/', auth, 
+    async (req, res) => {
+        try {
+            // Remove profile
+            await Profile.findOneAndRemove({ user: req.user.id });
+            // Remove user
+            // await User.findOneAndRemove({ _id: req.user.id });
+
+            res.json({ msg: 'User profile deleted' });
+        } 
         catch (err) {
             console.error(err.message);
             res.status(500).send('Server Error');

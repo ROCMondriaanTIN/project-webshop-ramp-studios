@@ -58,7 +58,7 @@ router.get('/',
             const count = await Product.countDocuments();
             let totalPages = Math.ceil(count / limit);
             const products = await Product.find(filter).sort(sort).skip(limit * (pageNo - 1)).limit(limit);
-            res.json({products: products, totalPages: totalPages, limit: limit, pageNo: pageNo});
+            res.json({products: products, totalPages: totalPages, limit: limit, pageNo: pageNo, totalProducts: count});
         } 
         catch (err) {
             console.error(err.message);
@@ -68,7 +68,7 @@ router.get('/',
 );
 
 // @route    GET api/products/:id
-// @desc     Get post by ID
+// @desc     Get product by ID
 // @access   Public
 router.get('/:id', 
     async (req, res) => {
@@ -93,15 +93,14 @@ router.get('/:id',
 
 //post Product toevoegen          admin
 // @route    POST api/products
-// @desc     Create a post
+// @desc     Create a post only Array 
 // @access   Private
-router.post('/', [auth, upload.array('images', 5)]
-        /*, [
+router.post('/', [auth, upload.array('images', 5), [
             check('name', 'Name is required').not().isEmpty(),
             check('category', 'category is required').not().isEmpty(),
             check('price', 'price is required').not().isEmpty(),
-        ],*/
-    ,
+        ],
+    ],
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -109,9 +108,6 @@ router.post('/', [auth, upload.array('images', 5)]
         }
         
         try {
-            // console.log(req.files);
-            // console.log(req);
-            // return; 
             const user = await User.findById(req.user.id).select('-password');
             
             if(user.role !== 'admin') {
@@ -119,14 +115,11 @@ router.post('/', [auth, upload.array('images', 5)]
                 return;
             }
 
-
             const { name, brand, category, description, price, sale, quantityInStock } = req.body;
             images = [];
             for(let i = 0; i < req.files.length; i++) {
                 images.push(req.files[i].path);
-            }  
-
-            console.log(images);
+            }
 
             const newProduct = new Product({ name, brand, images, category, description, price, sale, quantityInStock });
 
@@ -139,9 +132,6 @@ router.post('/', [auth, upload.array('images', 5)]
         }
     }
 );
-
-//get searchbyname /products?cat=sport   all
-
 
 // @route    PUT api/products/restock/:id
 // @desc     Restock a product
@@ -157,6 +147,11 @@ router.put('/restock/:id', [
             return res.status(400).json({ errors: errors.array() });
         }
         try {
+            const user = await User.findById(req.user.id).select('-password');
+            if(user.role !== 'admin') {
+                res.status(403).send('Not authorized');
+                return;
+            }
             const product = await Product.findById(req.params.id);
             const quantity = req.body.quantity; 
             product.quantityInStock += quantity;
@@ -171,7 +166,7 @@ router.put('/restock/:id', [
     }
 );
 
-// @route    PUT api/products/id/review
+// @route    PUT api/products/:id/review
 // @desc     Review a product
 // @access   Private
 router.put('/:id/review', [

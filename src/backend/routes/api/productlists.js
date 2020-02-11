@@ -74,7 +74,6 @@ router.get('/cart', auth,
 // @access   Private
 router.get('/carts', auth,
     async (req, res) => {
-        console.log(req);
         try {
             const productList = await ProductList.find();
             res.json(productList);
