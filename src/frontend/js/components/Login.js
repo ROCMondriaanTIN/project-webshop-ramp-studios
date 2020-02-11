@@ -3,7 +3,6 @@ class Login extends Component {
     constructor(isLoggedIn) {
         super(isLoggedIn ? "span" : "form");
         this.isLoggedIn = isLoggedIn;
-        console.log(this.isLoggedIn);
         this.initView();
     }
 

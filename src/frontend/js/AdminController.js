@@ -69,7 +69,7 @@ class Admin{
             }
         });
         
-        // Detele a product
+        // Delete a product
         let formDelete = document.getElementById("deleteProduct");
         console.log(formDelete);
         formDelete.addEventListener("submit", async (evt) => {

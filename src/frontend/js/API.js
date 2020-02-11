@@ -1,5 +1,4 @@
 class API {
-
     constructor() {
         this.url = 'http://localhost:5000/api'
         this.token;
