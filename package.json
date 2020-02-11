@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "browser": "start /max chrome.exe http://localhost:5000",
     "development": "sudo docker-compose up --build -d && xdg-open http://localhost:5000",
-    "development-windows": "docker-compose up --build -d && start /max chrome.exe http://localhost:5000"
+    "development-windows": "docker-compose up --build -d && start /max chrome.exe http://localhost:5000",
+    "dev" : "docker-compose up --build && start /max chrome.exe http://localhost:5000" 
   },
   "repository": {
     "type": "git",

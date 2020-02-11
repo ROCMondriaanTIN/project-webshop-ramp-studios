@@ -7,6 +7,8 @@ class Post {
         this.avatar = avatar;
     }
 
+    
+
     render() {
         let element = document.createElement('div');
         element.innerHTML = `

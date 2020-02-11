@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>addproduct</title>
+</head>
+<body>
+  <main>
+
+    <style>
+    div{
+      position:absolute;
+      top:20vh;
+      left:20vh;
+      width:500px;
+      display:flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+    </style>
+
+    <div>
+      <input type="text" placeholder="productnaam">
+      <input type="text" placeholder="brand">
+      <input type="text" placeholder="img">
+      <textarea name="" id="" cols="30" rows="10">beschrijving</textarea>
+      <input type="number" placeholder="price">
+      <input type="number" placeholder="quantity in stock">
+      <button>Add</button>
+    </div>
+
+
+      const productSchema = new Schema({
+        name: {type: String},          // productnaam
+        brand: {type: String},            // merk
+        images: [{
+          image: {type: String}
+        }],
+        description: {type: String},      // omschrijving
+        price: {type: Number},             // prijs
+        quantityInStock: {type: Number}, //aantal op voorraad
+        reviews: [ { post: { type: Schema.Types.ObjectId, ref: 'posts'} } ] // nog niet getest 
+      });
+
+
+    </form>
+  </main>
+</body>
+</html>

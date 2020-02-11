@@ -4,6 +4,9 @@ let api;
 let loginComponent;
 
 function main() {
+
+    document.querySelector('.wrapper')[0].innerHTML = new Product().getHTML();
+
     api = new API();
     // update the posts
     updatePosts();

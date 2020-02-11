@@ -31,6 +31,7 @@ class API {
         }
     }
 
+
     async createUser(name, email, password) {
         let response = await this.postData(this.url + '/users', {
             name,
@@ -81,6 +82,34 @@ class API {
         }
     }
 
+    //adds a product to the Database
+     async addProduct(product) {
+         console.log(product);
+        let response = await this.postData(this.url + '/products', product);
+        if (response.ok) {
+            let data = await response.json();
+            return data;
+        }
+        else {
+            throw `Error: ${response.status} ${response.statusText}`;
+        }
+    }
+
+
+     async getProducts() {
+        let response = await this.getData(this.url + '/products');
+        if (response.ok) {
+            let data = await response.json();
+            return data;
+        }
+        else {
+            throw `Error: ${response.status} ${response.statusText}`;
+        }
+    }
+
+
+
+    //model post
     async addPost(text) {
         let response = await this.postData(this.url + '/posts', { text });
         if (response.ok) {
@@ -103,6 +132,8 @@ class API {
         }
     }
 
+    
+    
     postData(url = '', data = {}) {
         // Default options are marked with *
         return fetch(url, {
@@ -112,11 +143,11 @@ class API {
         });
     }
 
-    getData(url = '', data = {}) {
+    getData(url = '') {
         // Default options are marked with *
         return fetch(url, {
             method: 'GET', // *GET, POST, PUT, DELETE, etc.
-            headers: this.headers,
+            headers: this.headers
         });
     }
 

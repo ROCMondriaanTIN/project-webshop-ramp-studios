@@ -5,9 +5,7 @@ const Schema = mongoose.Schema;
 const productSchema = new Schema({
   name: {type: String},          // productnaam
   brand: {type: String},            // merk
-  images: [{
-    image: {type: String}
-  }],
+  images: [{type: String}],
   description: {type: String},      // omschrijving
   price: {type: Number},             // prijs
   quantityInStock: {type: Number}, //aantal op voorraad
