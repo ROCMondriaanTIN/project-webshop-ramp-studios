@@ -23,6 +23,8 @@ class Login {
         e.preventDefault();
         let email = document.getElementById('email').value;
         let password = document.getElementById('password').value;
+        console.log(email),
+        console.log(password),
         api.loginUser(email, password)
             .then((response) => {
                 window.location = '/';

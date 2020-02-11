@@ -1,3 +1,7 @@
+window.addEventListener('onload', () => {
+    main();
+});
+
 window.onload = main;
 
 let api;
@@ -8,26 +12,20 @@ function main() {
     document.querySelector('.wrapper')[0].innerHTML = new Product().getHTML();
 
     api = new API();
-    // update the posts
-    updatePosts();
 
     // Render the login header
     loginComponent = new Login(api.isAuthenticated);
     document.getElementById("header").append(loginComponent.render());
 
-    let form = document.getElementById("addPost");
+    let form = document.getElementById("addProduct");
     form.addEventListener("submit", (evt) => {
         evt.preventDefault();
-        let textarea = document.getElementById('postText');
-        if(api.isAuthenticated && textarea.value !== '') {
-            api.addPost(textarea.value)
-                .then(() => {
-                    updatePosts();
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
+        let form = document.getElementById("addProduct");
+        let formData = new FormData(form);
+        for(let p of formData) {
+            console.log(p);
         }
+        api.addProduct(formData);
     }, true);
 
     // Check with the api if there is already al auth token.
@@ -48,24 +46,4 @@ function main() {
                 window.location = '/';
             });
     }
-    else {
-        document.getElementById('postButton').classList.add('disabled');
-        document.getElementById('postButton').setAttribute('disabled', 'disabled');
-    }
-    
-    
-}
-
-function updatePosts() {
-    let element = document.getElementById('dynamicPosts');
-    api.getPosts().then((data) => {
-        element.innerHTML = '';
-        for (const post of data) {
-            let postComponent = new Post(post.name, post.text, post.date, post.avatar);
-            element.append(postComponent.render());
-        }
-    })
-    .catch((err) => {
-        console.log(err);
-    });
 }

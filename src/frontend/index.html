@@ -6,31 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/index.css">
-    <title>Social Media</title>
+    <title>Backend Products</title>
 </head>
 
 <body>
     <header id="header" class="" >
         <h1>Hallo <span class="current-user"></span></h1>
     </header>
-    <div class="wrapper">
-        <h2>Posts</h2>
-        <div id="dynamicPosts">
-
-        </div>
-        <div class="post">
-            <h2>New Post</h2>
-            <form id="addPost">
-                <textarea id="postText" name="text" form="addPost"
-                    placeholder="Say something about your day!"></textarea><br>
+    <main>
+        <section>
+            <h2>New Product</h2>
+            <form id="addProduct">
+                <label for="name">Name</label>
+                <input name="name" type="text">
+                <label for="brand">Brand</label>
+                <input name="brand" type="text">
+                <label for="category">Category</label>
+                <input name="category" type="text">
+                <label for="description">Description</label>
+                <input name="description" type="text">
+                <label for="price">Price</label>
+                <input name="price" type="number" step="0.01">
+                <label for="sale">Sale</label>
+                <input name="sale" type="number" step="0.01" min="0" max="1">
+                <label for="quantityInStock">Quantity In Stock</label>
+                <input name="quantityInStock" type="number">
+                <label for="images">Images</label><br>
+                <input name="images" type="file" multiple><br>
                 <input class="button" type="submit" value="post" id="postButton" />
             </form>
-        </div>
-    </div>
+        </section>
+    </main>
     <script src="/js/components/Login.js"></script>
-    <script src="/js/components/Post.js"></script>
     <script src="/js/API.js"></script>
-    <script src="/js/Main.js"></script>
+    <script src="/js/MainProduct.js"></script>
 </body>
 
 </html>
