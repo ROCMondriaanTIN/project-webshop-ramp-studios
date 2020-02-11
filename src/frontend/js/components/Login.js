@@ -17,8 +17,7 @@ class Login extends Component {
             innerHTML = `
             <input type="text" name="email" id="email" value="">
             <input type="password" name="password" id="password" value="">
-            <input class="button" type="submit" value="Login">`;
-            
+            <input class="button" type="submit" value="Login">`; 
         }
         this.rootElement.id = id;
         this.rootElement.innerHTML = innerHTML;

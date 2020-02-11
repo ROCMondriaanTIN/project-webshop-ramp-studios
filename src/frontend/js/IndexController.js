@@ -8,10 +8,12 @@ window.addEventListener('load', () => {
 class Index {
     constructor(){
         this.loginComponent = new Login(api.isAuthenticated);
+        this.productsComponent = new Products();
     }
     
     async init(){
         document.getElementById("header").append(this.loginComponent.getView());
+        document.querySelector("main").append(this.productsComponent.getView());
                 
         // Check with the api if there is already al auth token.
         if(api.isAuthenticated) {

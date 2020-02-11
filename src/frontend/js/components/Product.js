@@ -3,7 +3,7 @@ class Product extends Component{
 //model
   constructor(data){
     super("article");
-      this.id = data.id;
+      this.id = data._id.substring(1);
       this.brand = data.brand;
       this.images = data.images;
       this.description = data.description;
@@ -20,7 +20,7 @@ class Product extends Component{
   initView(){
     this.rootElement.innerHTML = `
     <h2>${this.brand}</h2>
-    <img src="${this.images[0]}" alt="">
+    <img src="${this.images[0] ? this.images[0] : ""}" alt="">
     <p>${this.description}</p>
     <p>${this.price}</p>
     <button id="${this.id}" class="btn addProduct">voeg toe</button>`;
@@ -28,7 +28,7 @@ class Product extends Component{
     this.getElementById(this.id).addEventListener('click', ()=>{
       this.voegProductInProductList(1,2);
     });
-
+    console.log(this.rootElement);
   }
 
 }
