@@ -15,31 +15,14 @@
     </header>
     <main>
         <section>
-            <h2>New Product</h2>
-            <form id="addProduct">
-                <label for="name">Name</label>
-                <input name="name" type="text">
-                <label for="brand">Brand</label>
-                <input name="brand" type="text">
-                <label for="category">Category</label>
-                <input name="category" type="text">
-                <label for="description">Description</label>
-                <input name="description" type="text">
-                <label for="price">Price</label>
-                <input name="price" type="number" step="0.01">
-                <label for="sale">Sale</label>
-                <input name="sale" type="number" step="0.01" min="0" max="1">
-                <label for="quantityInStock">Quantity In Stock</label>
-                <input name="quantityInStock" type="number">
-                <label for="images">Images</label><br>
-                <input name="images" type="file" multiple><br>
-                <input class="button" type="submit" value="post" id="postButton" />
-            </form>
+            <h2>Products</h2>
+            <p id="productSection"></p>
         </section>
     </main>
+    <script src="/js/components/Component.js"></script>
     <script src="/js/components/Login.js"></script>
     <script src="/js/API.js"></script>
-    <script src="/js/MainProduct.js"></script>
+    <script src="js/IndexController.js"></script>
 </body>
 
 </html>
