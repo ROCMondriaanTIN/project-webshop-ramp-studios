@@ -92,7 +92,7 @@ class API {
     }
 
     async restockProduct(id, quantity) {
-        let response = await this.putData(this.url + '/products/'+ id +'/restock', {quantity: quantity});
+        let response = await this.putData(this.url + '/products/' + id + '/restock', { quantity: quantity });
         if (response.ok) {
             let data = await response.json();
             return data;
@@ -103,7 +103,7 @@ class API {
     }
 
     async deleteProduct(id) {
-        let response = await this.deleteData(this.url + '/products/'+ id);
+        let response = await this.deleteData(this.url + '/products/' + id);
         if (response.ok) {
             let data = await response.json();
             return data;
@@ -124,13 +124,12 @@ class API {
         }
     }
 
-
     // API Data calls GET, POST, PUT, DELETE
     postData(url = '', data = {}, isFormData = false) {
         let request = {
             method: 'POST'
         };
-        if(!isFormData){
+        if (!isFormData) {
             request.headers = this.headers;
             request.body = JSON.stringify(data);
         }

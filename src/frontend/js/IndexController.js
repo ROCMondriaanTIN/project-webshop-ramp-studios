@@ -6,19 +6,19 @@ window.addEventListener('load', () => {
 });
 
 class Index {
-    constructor(){
+    constructor() {
         this.loginComponent = new Login(api.isAuthenticated);
         this.productsComponent = new Products();
     }
-    
-    async init(){
+
+    async init() {
         document.getElementById("header").append(this.loginComponent.getView());
         document.querySelector("main").append(this.productsComponent.getView());
-                
+
         // Check with the api if there is already al auth token.
-        if(api.isAuthenticated) {
+        if (api.isAuthenticated) {
             // Get the logged in user
-            try{
+            try {
                 let userData = await api.getUser()
                 let userElements = document.getElementsByClassName('current-user');
                 // If succeded render name at all the current-user locations by class
@@ -26,23 +26,11 @@ class Index {
                     element.innerText = userData.name;
                 }
             }
-            catch(err){
+            catch (err) {
                 api.logoutUser();
                 console.log(err)
                 window.location = '/';
             }
-        }
-
-        this.loadProducts();
-    }
-
-    async loadProducts() {
-        try {
-            let products = await api.getProducts();
-            document.getElementById("productSection").innerHTML = JSON.stringify(products);
-        }
-        catch (err) {
-            console.error(err);
         }
     }
 }

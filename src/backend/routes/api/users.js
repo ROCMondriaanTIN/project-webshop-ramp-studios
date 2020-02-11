@@ -12,21 +12,21 @@ const User = require('../../models/User');
 // @desc     Register user
 // @access   Public
 router.post('/', [
-        check('name', 'Name is required')
-            .not()
-            .isEmpty(),
-        check('email', 'Please include a valid email')
-            .isEmail(),
-        check(
-            'password',
-            'Please enter a password with 6 or more characters'
-        ).isLength({ min: 6 })
-    ],
+    check('name', 'Name is required')
+        .not()
+        .isEmpty(),
+    check('email', 'Please include a valid email')
+        .isEmail(),
+    check(
+        'password',
+        'Please enter a password with 6 or more characters'
+    ).isLength({ min: 6 })
+],
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ 
-                errors: errors.array() 
+            return res.status(400).json({
+                errors: errors.array()
             });
         }
 
@@ -36,7 +36,7 @@ router.post('/', [
             let user = await User.findOne({ email });
 
             if (user) {
-                return res.status(400).json({ 
+                return res.status(400).json({
                     errors: [{ msg: 'User already exists' }]
                 });
             }
@@ -46,7 +46,7 @@ router.post('/', [
                 r: 'pg',
                 d: 'mm'
             });
-            role = role === 'admin' ? role : 'guest'; 
+            role = role === 'admin' ? role : 'guest';
             user = new User({
                 name,
                 email,
@@ -74,7 +74,7 @@ router.post('/', [
                     res.json({ token });
                 }
             );
-        } 
+        }
         catch (err) {
             console.error(err.message);
             res.status(500).send('Server error');

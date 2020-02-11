@@ -8,15 +8,15 @@ class Login extends Component {
 
     initView() {
         let id = "log-out";
-        let innerHTML = `Log out`;
-        let event = 'click';
-        if(!this.isLoggedIn) {
-            event = 'submit';
+        let innerHTML = "Log out";
+        let event = "click";
+        if (!this.isLoggedIn) {
+            event = "submit";
             id = "login";
             innerHTML = `
             <input type="text" name="email" id="email" value="">
             <input type="password" name="password" id="password" value="">
-            <input class="button" type="submit" value="Login">`; 
+            <input class="button" type="submit" value="Login">`;
         }
         this.rootElement.id = id;
         this.rootElement.innerHTML = innerHTML;
@@ -24,7 +24,7 @@ class Login extends Component {
     }
 
     onEvent(e) {
-        if(this.isLoggedIn) {
+        if (this.isLoggedIn) {
             api.logoutUser();
             window.location = '/';
         }

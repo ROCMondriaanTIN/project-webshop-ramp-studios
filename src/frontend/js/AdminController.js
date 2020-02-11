@@ -5,25 +5,25 @@ window.addEventListener('load', () => {
     admin.init();
 });
 
-class Admin{
-    constructor(){
+class Admin {
+    constructor() {
         this.loginComponent = new Login(api.isAuthenticated);
     }
-    
-    async init(){
+
+    async init() {
         document.getElementById("header").append(this.loginComponent.getView());
-                
+
         // Check with the api if there is already al auth token.
-        if(api.isAuthenticated) {
+        if (api.isAuthenticated) {
             // Get the logged in user
-            try{
+            try {
                 let userData = await api.getUser()
                 let userElements = document.getElementsByClassName('current-user');
                 // If succeded render name at all the current-user locations by class
                 for (let element of userElements) {
                     element.innerText = userData.name;
                 }
-            }catch(err){
+            } catch (err) {
                 api.logoutUser();
                 console.log(err)
                 window.location = '/';
@@ -36,7 +36,7 @@ class Admin{
             evt.preventDefault();
             let form = document.getElementById("addProduct");
             let formData = new FormData(form);
-            for(let p of formData) {
+            for (let p of formData) {
                 console.log(p);
             }
             try {
@@ -44,12 +44,12 @@ class Admin{
                 console.log(data);
                 window.location = '/';
             }
-            catch(err) {
+            catch (err) {
                 console.error(err);
                 formAddProduct.setAttribute("class", "error");
             }
         });
-        
+
         // Restock a product
         let formRestock = document.getElementById("restockProduct");
         formRestock.addEventListener("submit", async (evt) => {
@@ -63,12 +63,12 @@ class Admin{
                 console.log(data);
                 window.location = '/';
             }
-            catch(err) {
+            catch (err) {
                 console.error(err);
                 formRestock.setAttribute("class", "error");
             }
         });
-        
+
         // Delete a product
         let formDelete = document.getElementById("deleteProduct");
         console.log(formDelete);
@@ -81,7 +81,7 @@ class Admin{
                 console.log(data);
                 window.location = '/';
             }
-            catch(err) {
+            catch (err) {
                 console.error(err);
                 formDelete.setAttribute("class", "error");
             }

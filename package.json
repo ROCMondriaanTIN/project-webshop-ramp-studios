@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon src/server.js",
     "browser-windows": "start /max chrome.exe http://localhost:5000",
     "development-linux": "sudo docker-compose up --build -d && xdg-open http://localhost:5000",
     "development-windows": "docker-compose up --build -d && start /max chrome.exe http://localhost:5000",

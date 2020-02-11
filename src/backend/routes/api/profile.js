@@ -10,7 +10,7 @@ const Profile = require('../../models/Profile');
 // @route    GET api/profile/me
 // @desc     Get current users profile
 // @access   Private
-router.get('/me', auth, 
+router.get('/me', auth,
     async (req, res) => {
         try {
             const profile = await Profile.findOne({ user: req.user.id }).populate(
@@ -34,8 +34,7 @@ router.get('/me', auth,
 // @route    PUT api/profile/address
 // @desc     Add profile address
 // @access   Private
-router.put('/address',
-    [
+router.put('/address', [
         auth,
         [
             check('street', 'Street is required')
@@ -60,7 +59,7 @@ router.put('/address',
 
         // Get the values from the req.body
         const {
-            street,houseNumber,zipcode,city
+            street, houseNumber, zipcode, city
         } = req.body;
 
         const address = {
@@ -74,7 +73,7 @@ router.put('/address',
             }
             let profile = await Profile.findOneAndUpdate(
                 { user: req.user.id },
-                { $set: profileFields},
+                { $set: profileFields },
                 { new: true, upsert: true });
 
             // await profile.save();
@@ -91,7 +90,7 @@ router.put('/address',
 // @route    DELETE api/profile
 // @desc     Delete profile, user & posts
 // @access   Private
-router.delete('/', auth, 
+router.delete('/', auth,
     async (req, res) => {
         try {
             // Remove profile
@@ -100,7 +99,7 @@ router.delete('/', auth,
             // await User.findOneAndRemove({ _id: req.user.id });
 
             res.json({ msg: 'User profile deleted' });
-        } 
+        }
         catch (err) {
             console.error(err.message);
             res.status(500).send('Server Error');

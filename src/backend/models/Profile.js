@@ -3,12 +3,12 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const profileSchema = new Schema({
-    user: { type: Schema.Types.ObjectId, ref: 'users'},
+    user: { type: Schema.Types.ObjectId, ref: 'users' },
     address: {
-        street: {type: String},
-        houseNumber: {type: String},
-        zipcode: {type:String},
-        city: {type:String},
+        street: { type: String },
+        houseNumber: { type: String },
+        zipcode: { type: String },
+        city: { type: String },
     },
     date: {
         type: Date,

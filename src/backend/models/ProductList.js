@@ -7,17 +7,17 @@ const productListSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'users'
   },
-  name: {type: String, default: 'Cart'},
+  name: { type: String, default: 'Cart' },
   products: [{
     product: {
       type: Schema.Types.ObjectId,
       ref: 'products'
     },
-    amount: {type: Number, default: 1}
-  }], 
+    amount: { type: Number, default: 1 }
+  }],
   date: {
-      type: Date,
-      default: Date.now
+    type: Date,
+    default: Date.now
   }
 });
 

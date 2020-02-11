@@ -3,15 +3,15 @@ const Schema = mongoose.Schema;
 
 // Create Schema
 const productSchema = new Schema({
-  name: {type: String},          // productnaam
-  brand: {type: String},            // merk
-  images: [{type: String}],
-  category: {type: String},
-  description: {type: String},      // omschrijving
-  price: {type: Number},             // prijs
-  sale: {type: Number, default: 0, min:0, max:1}, // Percentage 0 to 1, 0.5 == 50%
-  quantityInStock: {type: Number}, //aantal op voorraad
-  reviews: [{ 
+  name: { type: String },          // productnaam
+  brand: { type: String },            // merk
+  images: [{ type: String }],
+  category: { type: String },
+  description: { type: String },      // omschrijving
+  price: { type: Number },             // prijs
+  sale: { type: Number, default: 0, min: 0, max: 1 }, // Percentage 0 to 1, 0.5 == 50%
+  quantityInStock: { type: Number }, //aantal op voorraad
+  reviews: [{
     user: {
       type: Schema.Types.ObjectId,
       ref: 'users'
@@ -30,10 +30,10 @@ const productSchema = new Schema({
       type: Date,
       default: Date.now
     },
-    rating:{
+    rating: {
       type: Number,
-      min:1,
-      max:5
+      min: 1,
+      max: 5
     }
   }],
   date: {

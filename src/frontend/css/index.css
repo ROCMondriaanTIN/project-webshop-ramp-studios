@@ -11,7 +11,7 @@ body {
 }
 
 body > header > img {
-  width:100px;
+  width: 100px;
 }
 
 main {
@@ -68,7 +68,8 @@ section {
   margin: 0.25rem;
 }
 
-.button.disabled, .button.material.disabled{
+.button.disabled,
+.button.material.disabled {
   background-color: #ccc; /* Green */
   color: #333;
 }
@@ -78,45 +79,47 @@ section {
 }
 
 textarea {
-    resize: none;
-    border-radius: 0.25rem;
-    overflow: auto;
-    border: 1px solid #ccc;
-    width: 100%;
-    padding: 1rem;
-    box-shadow: inset 0 1px 3px #ddd;
+  resize: none;
+  border-radius: 0.25rem;
+  overflow: auto;
+  border: 1px solid #ccc;
+  width: 100%;
+  padding: 1rem;
+  box-shadow: inset 0 1px 3px #ddd;
 }
 
-input[type=text], input[type=password], input[type=number] {
-    width: 100%;
-    margin: 0.25rem;
-    border: 1px solid #ccc;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    border-radius: 0.25rem;
-    box-shadow: inset 0 1px 3px #ddd;
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+  width: 100%;
+  margin: 0.25rem;
+  border: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.25rem;
+  box-shadow: inset 0 1px 3px #ddd;
 }
 
 header {
-    padding: .5rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); 
-    background-color: white;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  background-color: white;
 }
 
-main>section>article{
-  border:solid;
-  margin:3em;
-  padding:3em;
+main > section > article {
+  border: solid;
+  margin: 3em;
+  padding: 3em;
 }
 
 #login {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end; 
-    width: 50vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 50vw;
 }
 
 .error > input {
@@ -124,11 +127,11 @@ main>section>article{
 }
 
 #log-out {
-    color: #008cba;
-    text-decoration: underline;
-    line-height: 1rem;
-    padding: 0.5rem 1rem;
-    margin: 0.25rem;
+  color: #008cba;
+  text-decoration: underline;
+  line-height: 1rem;
+  padding: 0.5rem 1rem;
+  margin: 0.25rem;
 }
 
 #log-out.material {
