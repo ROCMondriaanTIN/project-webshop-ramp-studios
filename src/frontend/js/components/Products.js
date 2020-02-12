@@ -10,7 +10,8 @@ class Products extends Component {
             let products = await api.getProducts();
             this.rootElement.innerHTML = `
                 <h2>Products</h2>
-                ${JSON.stringify(products)} <br>
+                <p>
+                ${JSON.stringify(products)} </p><br>
             `;
 
             for (let p of products.products) {
