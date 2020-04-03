@@ -124,6 +124,56 @@ class API {
         }
     }
 
+    //Create a review
+    async createReview(text, rating, productid, token) {
+        let response = await this.putData(this.url + '/products/' + productid + '/review', {
+            "text": String(text),
+            "rating": parseInt(rating)
+        }, token);
+        if (response.ok) {
+            let data = await response.json();
+            console.log("Review successfully send");
+            return data;
+        }
+        else {
+            throw `Error: ${response.status} ${response.statusText}`;
+        }
+    }
+
+    //Add to cart
+    async addToCart(productid, token, amount) {
+        let data2 = {};
+        if (amount) data2.amount = amount;
+        let response = await this.putData(this.url + '/productslists/cart/product/' + productid, data2, token);
+        if (response.ok) {
+            let data = await response.json();
+            console.log("Product successfully added");
+            return data;
+        }
+        else {
+            throw `Error: ${response.status} ${response.statusText}`;
+        }
+    }
+
+    //Remove from cart
+    async removeFromCart(productid, token, amount) {
+        let response = await this.addToCart(productid, token, amount ? 0 - amount : -1)
+        return response;
+    }
+
+    //Get cart
+    async getCart(token) {
+        let response = await this.getData(this.url + '/productslists/cart/', token);
+        if (response.ok) {
+            let data = await response.json();
+            console.log("Cart successfully received");
+            return data;
+        }
+        else {
+            throw `Error: ${response.status} ${response.statusText}`;
+        }
+    }
+    
     // API Data calls GET, POST, PUT, DELETE
     postData(url = '', data = {}, isFormData = false) {
         let request = {
