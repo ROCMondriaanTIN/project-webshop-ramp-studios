@@ -1,6 +1,6 @@
  
 {
-    "mongoURI": "mongodb://mongo:27017/web-dev",
+    "mongoURI": "mongodb+srv://admin:FY6lghQLDctKdNYD@cluster0-doe6h.azure.mongodb.net/web-dev?retryWrites=true&w=majority",
     "jwtSecret": "Vx6VScMm9kz6ko",
     "githubClientId": "",
     "githubSecret": ""
