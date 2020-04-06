@@ -1,38 +1,13 @@
 load('top10');
 load('last10');
 load('newest10');
-dagdealtimer();
-function dagdealtimer() {
-    const timer = document.getElementById('dagdealtimer')
-    let now = new Date().getTime();
-    let end = new Date()
-    end.setUTCHours(23)
-    end.setUTCMinutes(0)
-    end.setUTCSeconds(0)
-    end = end.getTime();
-    let timeleft = end - now;
-    let hours = Math.floor(timeleft / 60 / 60 / 1000);
-    timeleft = timeleft - hours * 60 * 60 * 1000;
-    let minutes = Math.floor(timeleft / 60 / 1000) < 10 ? '0' + Math.floor(timeleft / 60 / 1000) : Math.floor(timeleft / 60 / 1000);
-    timeleft = timeleft - minutes * 60 * 1000;
-    let seconds = Math.floor(timeleft / 1000) < 10 ? '0' + Math.floor(timeleft / 1000) : Math.floor(timeleft / 1000);
-    timer.innerHTML = `${hours}:${minutes}:${seconds}`;
-} 
-setInterval(() => {
-    dagdealtimer();
-}, 1000);
 
 async function load(soort) {
-    const response = await fetch((`./api`), {
-        method: 'GET',
-        headers: {
-            'Content-type': 'json/application',
-            'get': soort
-        }
-    })
-    const data = JSON.parse(await response.json());
+    let data = await api.getProducts();
+    data = data.products;
+
     let done = 0;
-    let carousel
+    let carousel;
     if (soort === 'top10') carousel = document.getElementById('aanbevolen-carousel').children;
     else if (soort === 'last10') carousel = document.getElementById('laatstbekeken-carousel').children;
     else if (soort === 'newest10') carousel = document.getElementById('laatsttoegevoegd-carousel').children;
@@ -46,7 +21,7 @@ async function load(soort) {
         const section = carousel[done]
         //making image
         const image = section.appendChild(document.createElement('img'))
-        image.src = item.image;
+        image.src = item.images[0] || `../../img/productplaceholder.jpg`;
         //making div for text
         const div = section.appendChild(document.createElement('div'))
         //making name

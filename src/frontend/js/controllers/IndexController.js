@@ -12,7 +12,6 @@ class Index {
 
     async init() {
         document.getElementById("login").append(this.loginComponent.getView());
-        //fuck this line. useful if we rewrite it for other shit. but fuck this line
         //document.querySelector("main").append(this.productsComponent.getView());
 
         // Check with the api if there is already al auth token.
