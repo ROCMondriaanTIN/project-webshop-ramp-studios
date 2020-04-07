@@ -2,61 +2,37 @@ load('top10');
 load('last10');
 load('newest10');
 
-async function load(soort) {
-    let data = await api.getProducts();
-    data = data.products;
-
-    let done = 0;
+async function load(type) {
     let carousel;
-    if (soort === 'top10') carousel = document.getElementById('aanbevolen-carousel').children;
-    else if (soort === 'last10') carousel = document.getElementById('laatstbekeken-carousel').children;
-    else if (soort === 'newest10') carousel = document.getElementById('laatsttoegevoegd-carousel').children;
+    if (type === 'top10') carousel = document.getElementById('aanbevolen-carousel');
+    else if (type === 'last10') carousel = document.getElementById('laatstbekeken-carousel');
+    else if (type === 'newest10') carousel = document.getElementById('laatsttoegevoegd-carousel');
     else return;
-    for (let element in data) {
-        //getting item and section
-        const item = data[element]
-        let ratings = item.ratings || 0;
-        let stars = item.rating || 3;
 
-        const section = carousel[done]
-        //making image
-        const image = section.appendChild(document.createElement('img'))
-        image.src = item.images[0] || `../../img/productplaceholder.jpg`;
-        //making div for text
-        const div = section.appendChild(document.createElement('div'))
-        //making name
-        const name = div.appendChild(document.createElement('a'))
-        name.setAttribute('href', `/product.html?product=${item.name}`)
-        name.innerHTML = item.name;
-        //making description
-        const desc = div.appendChild(document.createElement('span'))
-        if (item.description.length >= (soort === 'last10' ? 65 : 105)) {
-            desc.innerHTML = item.description.slice(0, (soort === 'last10' ? 65 : 105)) + '... '
-            const leesmeer = desc.appendChild(document.createElement('a'));
-            leesmeer.innerHTML = 'Lees meer'
-            leesmeer.setAttribute("href", `/product.html?product=${item.name}`)
-        } else {
-            desc.innerHTML = item.description;
+    //get products
+    let response = await fetch((`./api/products?limit=100000`), {
+        method: 'GET',
+        headers: {
+            'Content-type': 'json/application',
         }
-        //making price
-        const price = div.appendChild(document.createElement('span'))
-        price.innerHTML = '€' + item.price;
-        //making review
-        const rating = div.appendChild(document.createElement('div'))
-        //adding stars inside the rating
-        let i = 1;
-        while (i <= 5) {
-            const star = rating.appendChild(document.createElement('span'))
-            star.innerHTML = '⋆'
-            if (stars >= i) star.style.color = '#ffe100';
-            else star.style.color = '#333';
-            i++;
-        }
-        const amountofratings = rating.appendChild(document.createElement('span'))
-        amountofratings.innerHTML = `(${ratings})`
-        //making button
-        const button = div.appendChild(document.createElement('button'))
-        button.innerHTML = '🛒 Add to cart'
-        done ++;
+    })
+    response = (await response.json()).products;
+    for (let i = 0; i < 10; i++) {
+        const data = response[i];
+        if (!data) break;
+        data['type'] = type;
+        const newdiv = new Product(data);
+        newdiv.rootElement.className = 'carousel-cell'
+        carousel.appendChild(newdiv.rootElement);
+    }
+
+    if (type === 'newest10') {
+        let scr  = document.createElement('script'),
+        head = document.head || document.getElementsByTagName('head')[0];
+        scr.src = "js/ramp/flickity.pkgd.js";
+
+        head.insertBefore(scr, head.firstChild);
+
+
     }
 }

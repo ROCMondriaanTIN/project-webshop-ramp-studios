@@ -53,7 +53,7 @@ class Loadproduct extends Component {
           }
 
           //Half stars
-          var decimal = avaragereview - Math.floor(avaragereview)
+          let decimal = avaragereview - Math.floor(avaragereview)
           if(decimal > 0.4 && decimal <= 0.9){
             nostar = nostar -1;
             let element = document.getElementById("reviews");

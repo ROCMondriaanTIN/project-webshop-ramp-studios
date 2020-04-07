@@ -36,9 +36,9 @@ if(api.hasToken()){
             console.log(p);
         }
         try {
-            var rating = document.forms["review"]["rating"].value;
-            var text = document.forms["review"]["text"].value;
-            let response = await api.createReview(text, rating, cleanString, token);
+            const rating = document.forms["review"]["rating"].value;
+            const text = document.forms["review"]["text"].value;
+            const response = await api.createReview(text, rating, cleanString, token);
             location.reload();
         }
         catch (err) {

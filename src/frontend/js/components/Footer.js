@@ -1,4 +1,12 @@
-document.getElementById('footer').innerHTML = `
+class Footer extends Component {
+    constructor(){
+        super("footer");
+        this.rootElement.id = "footerHTML";
+        this.initView();
+    }
+
+    initView(){
+        this.rootElement.innerHTML = `
         <!-- links in footer -->
         <div>
             <div>
@@ -45,3 +53,5 @@ document.getElementById('footer').innerHTML = `
         <!-- bottom discloser -->
         <h4>* Alle prijzen zijn inclusief BTW en exclusief eventuele <a href="">verzendkosten</a> en servicekosten.</h4>
         `;
+    }  
+}

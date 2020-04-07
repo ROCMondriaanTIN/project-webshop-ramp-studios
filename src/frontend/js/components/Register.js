@@ -29,11 +29,11 @@ if(localStorage.getItem('token') <= 0){
         let form = document.getElementById("addUser");
         let formData = new FormData(form);
         try {
-            var name = document.forms["register"]["name"].value;
-            var email = document.forms["register"]["email"].value;
-            var password = document.forms["register"]["password"].value;
+            const name = document.forms["register"]["name"].value;
+            const email = document.forms["register"]["email"].value;
+            const password = document.forms["register"]["password"].value;
             try {
-                var response = await api.createUser(name, email, password);
+                const response = await api.createUser(name, email, password);
                 if (response.errors && response.errors[0]) {
                     alert(response.errors[0].msg)
                 } else{
