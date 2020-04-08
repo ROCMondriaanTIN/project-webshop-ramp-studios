@@ -1,53 +1,28 @@
-if(localStorage.getItem('token') <= 0){
-    let element = document.getElementById("register")
-    let para = document.createElement("div");
-    para.id = "register-form";
-    para.innerHTML = `
-    <form class="register-div" id="addUser" name="register" action="/action_page.php">
-        <h2>Register:</h2>
-        <!-- Name -->
-        <br><label class="register" for="name">Name:</label>
-        <input type="text" id="name" name="name">
+class RegisterPage extends Component {
+    constructor(){
+        super("div");
+        this.rootElement.id = "register-form";
+        this.initView();
+    }
 
-        <!-- email -->
-        <br><label class="register" for="email">E-mail:</label>
-        <input type="text" id="email" name="email">
+    initView(){
+        this.rootElement.innerHTML = `
+            <form class="register-div" id="addUser" name="register" action="/action_page.php">
+            <h2>Register:</h2>
+            <!-- Name -->
+            <br><label class="register" for="name">Name:</label>
+            <input type="text" id="name" name="name">
 
-        <!-- password -->
-        <br><label class="register" for="password">Password:</label>
-        <input type="password" type="text" id="password" name="password">
+            <!-- email -->
+            <br><label class="register" for="email">E-mail:</label>
+            <input type="text" id="email" name="email">
 
-        <input type="submit" value="Submit" class="button">
-    </form> 
-    `
+            <!-- password -->
+            <br><label class="register" for="password">Password:</label>
+            <input type="password" type="text" id="password" name="password">
 
-    element.appendChild(para);
-
-    let formAddUser = document.getElementById("addUser");
-    formAddUser.addEventListener("submit", async (evt) => {
-        evt.preventDefault();
-        let form = document.getElementById("addUser");
-        let formData = new FormData(form);
-        try {
-            const name = document.forms["register"]["name"].value;
-            const email = document.forms["register"]["email"].value;
-            const password = document.forms["register"]["password"].value;
-            try {
-                const response = await api.createUser(name, email, password);
-                if (response.errors && response.errors[0]) {
-                    alert(response.errors[0].msg)
-                } else{
-                    window.location.href = "/";
-                }
-                //alert(response);
-                return response;
-                } catch (e) {
-                console.log(e);
-            }
-        }
-        catch (err) {
-            console.log(err);
-            formAddUser.setAttribute("class", "error");
-        }
-    });
+            <input type="submit" value="Submit" class="button">
+        </form> 
+        `;
+    }  
 }

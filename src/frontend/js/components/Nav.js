@@ -3,6 +3,7 @@ class Nav extends Component {
         super("nav");
         this.rootElement.id = "nav";
         this.initView();
+        this.getusername();
     }
 
     initView() {

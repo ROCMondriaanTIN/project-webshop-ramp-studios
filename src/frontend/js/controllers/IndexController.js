@@ -16,8 +16,10 @@ class Index {
         document.querySelector("footer").append(footer.getView());
 
         //aside
-        let aside = new Aside();
-        document.querySelector("main").append(aside.getView());
+        if (!(window.location.pathname == "/register.html")) {
+            let aside = new Aside();
+            document.querySelector("main").append(aside.getView());
+        }
 
         //login
         document.getElementById("login").append(this.loginComponent.getView());

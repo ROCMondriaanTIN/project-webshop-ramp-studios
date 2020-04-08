@@ -21,10 +21,16 @@ async function loadCart() {
                     totaalprijs += element.priceTotal;
                     para1.innerHTML = `
                         <br>
-                        <img class="ww-img" style="float: left; height: 10vh; width: 10vw;" src="${x.images[0] || placeholder}"></img>
+                        <img class="ww-img" style="float: left; height: 10vh; width: 10vw;" src="${element.image[0] || placeholder}"></img>
                         <p> Naam product: ${element.name} </p>
-                        <button onclick = "remove('${element._id}')" style="float: right; margin-right: 10px;">Remove one</button>
-                        <button onclick = "remove('${element._id}', ${element.amount})" style="float: right; margin-right: 10px;">Remove all</button>
+                        <button onclick = "
+                            let x = api.removeFromCart('${String(element._id)}', localStorage.getItem('token'), null)
+                            location.reload();
+                        " style="float: right; margin-right: 10px;">Remove one</button>
+                        <button onclick = "
+                            let x = api.removeFromCart('${String(element._id)}', localStorage.getItem('token'), ${element.amount})
+                            location.reload();
+                        " style="float: right; margin-right: 10px;">Remove all</button>
                         <p> Prijs: €${element.price.toFixed(2)} p.s. </p>
                         <p> Hoeveelheid: ${element.amount} </p>
                         <p> Prijs totaal: €${element.priceTotal.toFixed(2)} </p>

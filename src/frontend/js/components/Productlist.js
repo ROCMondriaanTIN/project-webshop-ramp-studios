@@ -17,7 +17,6 @@ async function loadlist() {
         }
     })
     response = (await response.json()).products;
-    console.log(response)
     const name = getParameterByName('q');
     let categories = getParameterByName('c')
     if (categories) categories = categories.split("+")

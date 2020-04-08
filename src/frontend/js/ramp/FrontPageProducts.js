@@ -34,7 +34,7 @@ async function load(type) {
     if (type === 'newest10') {
         let scr  = document.createElement('script'),
         head = document.head || document.getElementsByTagName('head')[0];
-        scr.src = "js/ramp/flickity.pkgd.js";
+        scr.src = "js/other/flickity.pkgd.js";
         head.insertBefore(scr, head.firstChild);
     }
 }
