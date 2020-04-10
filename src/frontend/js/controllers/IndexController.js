@@ -1,5 +1,3 @@
-const api = new API();
-
 window.addEventListener('load', () => {
     let index = new Index();
     index.init();

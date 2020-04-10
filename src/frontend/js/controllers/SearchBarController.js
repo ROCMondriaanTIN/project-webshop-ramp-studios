@@ -1,3 +1,5 @@
+const api = new API();
+
 window.addEventListener('load', () => {
     let searchbarcontroller = new SearchBarController();
     searchbarcontroller.init();

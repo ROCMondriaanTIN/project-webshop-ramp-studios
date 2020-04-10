@@ -1,5 +1,3 @@
-const api = new API();
-
 window.addEventListener('load', () => {
     let register = new Register();
     register.init();
