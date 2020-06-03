@@ -30,7 +30,7 @@ class Product extends Component {
             rating = totalratings / this.reviews.length;
         }
         this.rootElement.innerHTML = `
-            <img src="${this.images[0] ? this.images[0] : "../../img/productplaceholder.jpg"}">
+            <img src="${this.images[0] ? this.images[0].substring(13) : "../../img/productplaceholder.jpg"}">
             <div style="height: 100%; display: flex; position: relative;">
                 <a href="/product.html?product=${this.id}" style="margin-left: 10px; font-weight: 700;">${this.name}</a>
                 <span>

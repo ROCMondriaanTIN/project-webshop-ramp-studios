@@ -27,9 +27,9 @@ class ProductPage {
                     document.getElementById("product-naam").innerHTML=`${product[i].name}`;
                     document.getElementById("category").innerHTML=`Category: ${product[i].category}`;
                     document.getElementById("description").innerHTML= product[i].description;
-                    document.getElementById("image0").src = product[i].images[0] || placeholder;
-                    document.getElementById("image1").src = product[i].images[1] || placeholder;
-                    document.getElementById("image2").src = product[i].images[2] || placeholder;
+                    document.getElementById("image0").src = product[i].images[0].substring(13) || placeholder;
+                    document.getElementById("image1").src = product[i].images[1].substring(13) || placeholder;
+                    document.getElementById("image2").src = product[i].images[2].substring(13) || placeholder;
             
                     let totalrating = 0;
                     for(let z = 0; z < product[i].reviews.length; z++) {

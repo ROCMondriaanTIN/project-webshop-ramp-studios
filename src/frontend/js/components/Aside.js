@@ -25,7 +25,7 @@ class Aside extends Component {
             <ul>
                 <li><a aria-hidden="true" class="fab fa-facebook-square" href="www.facebook.com"></a></li>
                 <li><a aria-hidden="true" class="fab fa-linkedin-in" href="www.linkdin.nl"></a></li>
-                <li><a aria-hidden="true" class="fab fa-twitter" href="www.twiter.nl"></a></li>
+                <li><a aria-hidden="true" class="fab fa-twitter" href="www.twitter.nl"></a></li>
                 <li><a aria-hidden="true" class="fab fa-instagram" href="www.instagram.nl"></a></li>
             </ul>
         </div>`
